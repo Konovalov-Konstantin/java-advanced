@@ -31,12 +31,14 @@ public class LoggerBeanPostProcessor implements BeanPostProcessor {
         Class<?> targetClass = ClassUtils.getUserClass(bean.getClass());
         if (hasLoggerAnnotation(targetClass)) {
             Object targetObject = createTargetObject(createTargetClassLogger(targetClass));
+            // создание Proxy и подмена бина с внедренным логгером, если класс аннотирован @OurLogger
             return createProxyTargetObject(targetObject);
         }
 
         return bean;
     }
 
+    // внедрение поля Logger в класс, аннотированный
     <T> Class<? extends T> createTargetClassLogger(Class<T> targetClass) {
         try {
             return byteBuddy

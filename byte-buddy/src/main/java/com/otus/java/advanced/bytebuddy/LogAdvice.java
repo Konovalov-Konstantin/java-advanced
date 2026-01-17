@@ -30,7 +30,7 @@ public class LogAdvice implements MethodInterceptor {
 
             log.info("before method: {} invocation", methodName);
 
-            Object returnValue = invocation.proceed();
+            Object returnValue = invocation.proceed();  // вызов оригинального метода
             log.info("after method: {} invocation", methodName);
 
             return returnValue;

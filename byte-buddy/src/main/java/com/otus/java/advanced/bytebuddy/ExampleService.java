@@ -4,7 +4,7 @@ import com.otus.java.advanced.bytebuddy.annotation.OurLog;
 import com.otus.java.advanced.bytebuddy.annotation.OurLogger;
 import lombok.ToString;
 
-@OurLogger
+@OurLogger  // для внедрения Logger-а в текущий класс (см. LoggerBeanPostProcessor)
 @ToString
 public class ExampleService {
 
