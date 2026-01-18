@@ -34,7 +34,7 @@ public class PerformanceTransformer implements ClassFileTransformer {
                             String className,
                             Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain,
-                            byte[] classFileBuffer) {
+                            byte[] classFileBuffer) {   // байт-код
 
         var byteCode = classFileBuffer;
 
@@ -43,7 +43,7 @@ public class PerformanceTransformer implements ClassFileTransformer {
             return byteCode;
         }
 
-        if (loader.equals(classLoader)) {
+        if (loader.equals(classLoader)) {   // если нашли нужный класс
             info("Transforming the class: " + className);
             try {
                 info("Original class's byte code: \n" + getByteCodeAsString(byteCode));
@@ -54,11 +54,13 @@ public class PerformanceTransformer implements ClassFileTransformer {
                 info("Getting class {}" + instrumentedClassName);
                 CtClass cc = cp.get(instrumentedClassName);
                 CtMethod m = cc.getDeclaredMethod(instrumentedMethodName);
-                m.addLocalVariable("startTime", CtClass.longType);
-                m.insertBefore("startTime = System.nanoTime();");
+                m.addLocalVariable("startTime", CtClass.longType);  // добавление доп.переменной в оригинальный метод
+                m.insertBefore("startTime = System.nanoTime();");     // доп.логика до вызова основного метода
 
                 m.addLocalVariable("endTime", CtClass.longType);
                 m.addLocalVariable("opTime", CtClass.longType);
+
+                // доп.логика после основного метода
                 m.insertAfter("""
                                       endTime = System.nanoTime();
                                       opTime = (endTime-startTime)/1000;
@@ -71,7 +73,7 @@ public class PerformanceTransformer implements ClassFileTransformer {
 
                 /* LESSON why is the old byte code here ? */
                 info("Instrumented class's byte code: \n{}" + getByteCodeAsString(instrumentedClassName));
-                /*info("Instrumented class's byte code: \n{}" + getByteCodeAsString(byteCode));*/
+                /*info("Instrumented class's byte code: \n{}" + getByteCodeAsString(byteCode));*/ // байт-код измененного класса
 
                 saveToFile(instrumentedClassName, byteCode);
 

@@ -9,9 +9,12 @@ public class SomeService {
     private static final Logger log = LoggerFactory.getLogger(SomeService.class);
 
     public void process(int data) throws InterruptedException {
+        /** закомментированный код вынесен в PerformanceTransformer */
+//        long startTime = System.nanoTime();
         TimeUnit.SECONDS.sleep(2);
-
-        /* LESSON Demo of 'Reload changed classes' idea's feature */
         log.info("Successful operation: {}", data);
+//        long endTime = System.nanoTime();
+//        long opTime = startTime - endTime / (long) 1000;
+//        log.info("[My log] operation completed in {} ms", opTime);
     }
 }
