@@ -28,19 +28,20 @@ include(":grpc:productinfo:java:client")
 include("resilience-example-load")
 include("resilience-patterns-examples")
 
-include("actuator")
+//include("actuator")
 include("admin")
 include("hello-service-main")
 include("observability")
-include("spring-boot-3-observability-main")
+//include("spring-boot-3-observability-main")
 include("springboot3-observablity-master")
 include("template")
 
-project(":actuator").projectDir = file("actuator/actuator")
+//project(":actuator").projectDir = file("actuator/actuator")
 project(":admin").projectDir = file("actuator/admin")
 project(":hello-service-main").projectDir = file("actuator/hello-service-main")
 project(":observability").projectDir = file("actuator/observability")
-project(":spring-boot-3-observability-main").projectDir = file("actuator/spring-boot-3-observability-main")
+//project(":spring-boot-3-observability-main").projectDir = file("actuator/spring-boot-3-observability-main")
+project(":springboot3-observablity-master").projectDir = file("actuator/springboot3-observablity-master")
 project(":template").projectDir = file("actuator/template")
 
 
@@ -48,8 +49,8 @@ project(":template").projectDir = file("actuator/template")
 project(":resilience-example-load").projectDir = file("resilience-design-patterns/resilience-example-load")
 project(":resilience-patterns-examples").projectDir = file("resilience-design-patterns/resilience-patterns-examples")
 
-//include("java-memory:java-memory")
-//include("java-memory:gc_serial_parallel_cms")
+include("java-memory:java-memory")
+include("java-memory:gc_serial_parallel_cms")
 
 
 include("graalvm")

@@ -4,6 +4,9 @@ import com.otus.java.advanced.HeapUtils;
 
 /**
  * java -Xms10m -Xmx2g -XX:+HeapDumpOnOutOfMemoryError
+ * параметр -XX:+HeapDumpOnOutOfMemoryError при ошибке OutOfMemory позволяет сохранить файл с дампом памяти в корень
+ * приложения (***.hprof), который можно проанализировать для поиска утечки памяти в Eclipse Memory Analyzer Tool
+ * для имитации нагрузки (N запросов в секунду) можно использовать jmeter
  */
 public class OutOfMemoryError_1_JavaHeapSpaceTest {
 
@@ -28,7 +31,7 @@ public class OutOfMemoryError_1_JavaHeapSpaceTest {
     }
 
     public static void main(String[] args) {
-        new OutOfMemoryError_1_JavaHeapSpaceTest().enough_space_success();
-//        new OutOfMemoryError_1_JavaHeapSpaceTest().not_enough_space_error();
+//        new OutOfMemoryError_1_JavaHeapSpaceTest().enough_space_success();
+        new OutOfMemoryError_1_JavaHeapSpaceTest().not_enough_space_error();
     }
 }
